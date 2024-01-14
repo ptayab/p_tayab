@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="personal.css" />
+    <title>Princess Tayab</title>
+  </head>
+
+  <body>
+    <nav>
+      <!-- <h1>Princess Tayab</h1> -->
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <a href="#otherpursuits">Other Pursuits</a>
+
+      <a href="https://ca.linkedin.com/in/princess-tayab-03a166178">
+        <img src="images/linkedin-icon.png" />
+      </a>
+      <a href="https://github.com/ptayab">
+        <img src="images/github-icon.png" id="github-icon" />
+      </a>
+    </nav>
+
+    <section id="about">
+      <div id="about-contents">
+        <div id="about-text">
+          <h2>Hi I'm Princess!</h2>
+          <p>
+            I'm a Computer Science student at the University of Saskatchewan.
+            Over the past two years, I've immersed myself in coursework,
+            complemented by my independent learning journey. In between coding
+            adventures, you'll catch me volunteering and daydreaming about
+            processes and apps that can make life a bit better.
+          </p>
+        </div>
+        <!-- <p>download Resume</p> -->
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="project-icons">
+        <div class="icon-row">
+          <img
+            src="images/this-or-that icon.png"
+            onclick="showProjectDetails(1)"
+          />
+          <img src="images/codex icon.png" onclick="showProjectDetails(2)" />
+          <img src="images/equipay icon.png" onclick="showProjectDetails(3)" />
+        </div>
+
+        <div class="icon-row">
+          <img
+            src="images/racket reservations icon.png"
+            onclick="showProjectDetails(4)"
+          />
+          <img
+            src="images/mission red icon.png"
+            onclick="showProjectDetails(5)"
+          />
+          <img
+            src="images/galaxy game icon.png"
+            onclick="showProjectDetails(6)"
+          />
+        </div>
+      </div>
+
+      <div class="popUp" id="projectPopUp">
+        <div class="popUpNav">
+          <span onclick="toggleFullscreen()">🗖</span>
+          <span onclick="closeProjectPopUp()"> x </span>
+        </div>
+        <div id="projectDetailsContent"></div>
+        <div class="image-navigation-container">
+          <button onclick="prevImage()">&lt;</button>
+          <img id="projectImage" src="" />
+          <button onclick="nextImage()">&gt;</button>
+        </div>
+        <div id="projectDescription"></div>
+      </div>
+    </section>
+
+    <!-- Pursuits Section -->
+    <section id="otherpursuits">
+      <h2>Other Pursuits</h2>
+      <div class="icon-row">
+        <div class="gallery" onclick="showProjectDetails(7)">
+          <img src="images/CSSS - Square.png" onclick="showProjectDetails(7)" />
+          <p>Computer Science Student Society</p>
+        </div>
+
+        <div class="gallery" onclick="showProjectDetails(8)">
+          <img src="images\ac.png" onclick="showProjectDetails(8)" />
+          <p>Appreciation Campaign</p>
+        </div>
+      </div>
+      <div class="icon-row">
+        <div class="gallery" onclick="showProjectDetails(9)">
+          <img
+            src="images\junior-achievement.jpg"
+            onclick="showProjectDetails(9)"
+          />
+          <p>Junior Achievement</p>
+        </div>
+
+        <div class="gallery" onclick="showProjectDetails(10)">
+          <img src="images\travel.png" onclick="showProjectDetails(10)" />
+          <p>Travel</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3>I'd Love to Connect With You!</h3>
+
+      <form action="https://formspree.io/prt898@usask.ca" method="POST">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <script>
+      let currentImageIndex = 0;
+
+      function showProjectDetails(projectNumber) {
+        const projectDetails = getProjectDetails(projectNumber);
+
+        const popUp = document.getElementById("projectPopUp");
+        const detailsContent = document.getElementById("projectDetailsContent");
+        const projectImage = document.getElementById("projectImage");
+
+        currentProjectNumber = projectNumber;
+        currentImageIndex = 0;
+
+        projectImage.src = projectDetails.images[currentImageIndex];
+        detailsContent.innerHTML = `
+        <h3>${projectDetails.title}</h3>
+        <p>${projectDetails.description}</p>
+    `;
+        popUp.style.display = "block";
+        projectImage.style.maxWidth = "100%";
+      }
+
+      function closeProjectPopUp() {
+        const popUp = document.getElementById("projectPopUp");
+        popUp.style.display = "none";
+      }
+
+      function prevImage() {
+        if (currentImageIndex > 0) {
+          currentImageIndex--;
+          updateImage();
+        }
+      }
+
+      function nextImage() {
+        const projectDetails = getProjectDetails(currentProjectNumber);
+        if (currentImageIndex < projectDetails.images.length - 1) {
+          currentImageIndex++;
+        } else {
+          currentImageIndex = 0;
+        }
+        updateImage();
+      }
+
+      function updateImage() {
+        const projectDetails = getProjectDetails(currentProjectNumber);
+        const projectImages = projectDetails.images;
+        document.getElementById("projectImage").src =
+          projectImages[currentImageIndex];
+      }
+
+      let isFullscreen = false;
+
+      function toggleFullscreen() {
+        const popUp = document.getElementById("projectPopUp");
+
+        if (!isFullscreen) {
+          popUp.style.height = "100vh";
+          popUp.style.top = "0";
+          popUp.style.left = "0";
+          popUp.style.transform = "none";
+        } else {
+          popUp.style.width = "auto";
+          popUp.style.height = "auto";
+          popUp.style.top = "50%";
+          popUp.style.left = "50%";
+          popUp.style.transform = "translate(-50%, -50%)";
+        }
+
+        isFullscreen = !isFullscreen;
+      }
+
+      function getProjectDetails(projectNumber) {
+        if (projectNumber === 1) {
+          return {
+            title: "This or That",
+            description:
+              "A decision making web application, made using MongoDB, Express.js, Node.js, and React.js.<br>" +
+              "&bull; Feeling hungry and don't know what to do? Check out the Restaurant Search Feature.<br>" +
+              "&bull; Unsure if you should do something or not? Check out the Spinning Wheel Feature.<br>" +
+              "&bull; Trying to win the lottery? Check out the Number Generator Feature. <br><br>" +
+              "Github link: <a href='https://github.com/ptayab/thisorthat' target='_blank'>This or That</a>.",
+            images: [
+              "images/This or That Gallery/Home.png",
+              "images/This or That Gallery/res_feature1.png",
+              "images/This or That Gallery/res_feature2.png",
+              "images/This or That Gallery/res_feature3.png",
+              "images/This or That Gallery/wheel_feature1.png",
+              "images/This or That Gallery/num_feature1.png",
+              "images/This or That Gallery/num_feature2.png",
+            ],
+          };
+        } else if (projectNumber === 2) {
+          return {
+            title: "Codex",
+            description:
+              "A collaborative hub designed for students to engage in discussions and share ideas through various channels, made using React.js, Node.js, Express.js, and SQL2.<br>" +
+              "&bull; Create Channels to discuss ideas.<br>" +
+              "&bull; Create Posts to ask questions.<br>" +
+              "&bull; Leave a comment and respond to comments to engage in coversations <br>" +
+              "&bull; Leave a likes or dislikes to express how you feel.<br><br>" +
+              "Github link: <a href='https://github.com/ptayab/codex' target='_blank'>Codex</a>.",
+            images: [
+              "images/Codex Gallery/Landing.png",
+              "images/Codex Gallery/channels.png",
+              "images/Codex Gallery/Posts.png",
+              "images/Codex Gallery/Replies.png",
+              "images/Codex Gallery/admin view.png",
+              "images/Codex Gallery/admin view2.png",
+            ],
+          };
+        } else if (projectNumber === 3) {
+          return {
+            title: "EquiPay",
+            description:
+              "A group expense tracker and splitter that automatically and conveniently splits bills, receipts, and costs among all involved participants equally, made using SQLite, React.js, Node.js, and Express.js.<br>" +
+              "&bull; Create Groups to add different users<br>" +
+              "&bull; Create expenses and split expenses to charge different users.<br>" +
+              "&bull; Leave comments and notes to communicate with other users. <br>" +
+              "&bull; Notify users to remind them about unpaid expenses. <br>" +
+              "&bull; Keep track of history expenses and many more.<br><br>" +
+              "Github link: <a href='https://github.com/ptayab/equipay' target='_blank'>EquiPay</a>.",
+            images: [
+              "images/EquiPay Gallery/registration page.png",
+              "images/EquiPay Gallery/Groups.png",
+              "images/EquiPay Gallery/expense.png",
+              "images/EquiPay Gallery/expense-create.png",
+              "images/EquiPay Gallery/expense-paid.png",
+              "images/EquiPay Gallery/expenses.png",
+              "images/EquiPay Gallery/comments feature.png",
+              "images/EquiPay Gallery/seetle up.png",
+              "images/EquiPay Gallery/history.png",
+              "images/EquiPay Gallery/reminder email.png",
+            ],
+          };
+        } else if (projectNumber === 4) {
+          return {
+            title: "Racket Reservations",
+            description:
+              "A court booking system made with JavaFX. Follow my process as I transform initial sketches into a fully functional program." +
+              "<br>&bull; Select a day and time to book courts.<br>" +
+              "&bull; View bookings to know when your scheduled time is.<br>" +
+              "&bull; Cancel bookings if you can't make it to your time slot.<br><br>" +
+              "Github link: <a href='https://github.com/ptayab/RacketReservations' target='_blank'>Racket Reservations</a>.",
+            images: [
+              "images/Racket Reservations Gallery/s1 (1).jpg",
+              "images/Racket Reservations Gallery/s1 (2).jpg",
+              "images/Racket Reservations Gallery/s2.jpg",
+              "images/Racket Reservations Gallery/s2-2.jpg",
+              "images/Racket Reservations Gallery/s2-3.jpg",
+              "images/Racket Reservations Gallery/s2-4.jpg",
+              "images/Racket Reservations Gallery/home.png",
+              "images/Racket Reservations Gallery/booking.png",
+              "images/Racket Reservations Gallery/veiw booking.png",
+              "images/Racket Reservations Gallery/Cancelled.png",
+            ],
+          };
+        } else if (projectNumber === 5) {
+          return {
+            title: "Mission Red",
+            description:
+              "A group project made with unity and coded in C#." +
+              "You find yourself lost in space, and your only chance of survival lies in navigating through the unknown.<b>" +
+              "&bull; Defeat enemies and challenge formidable boss enemies. <br>" +
+              "&bull; Collect epic loot to create a variety of new weapons. <br>" +
+              "&bull; Explore intriguing shipwreck and cave environments. <br><br>" +
+              "Download Game Build to Play: <a href='https://drive.google.com/file/d/1lgk17tffs9IdSrz-fGTvm88H8NifO-O5/view?usp=sharing' target='_blank'>Mission Red</a>",
+            images: [
+              "images/Mission Red Gallery/1.png",
+              "images/Mission Red Gallery/2 (2).png",
+              "images/Mission Red Gallery/3.png",
+              "images/Mission Red Gallery/4.png",
+              "images/Mission Red Gallery/5.png",
+              "images/Mission Red Gallery/6.png",
+            ],
+          };
+        } else if (projectNumber === 6) {
+          return {
+            title: "Interstellar Endocytosis",
+            description:
+              "Game Jam Project made with unity and coded in C#. " +
+              "All artwork has been hand-drawn by me using Photoshop. " +
+              "Embark on an intergalactic adventure that blends chemistry, food, aliens, and space." +
+              "Survive and get the highest score. <br><br>" +
+              "Check out the game <a href='https://brains476.itch.io/interstellar-endocytosis' target='_blank'>here</a>.",
+            images: [
+              "images/Interstellar Endocytosis Gallery/Untitled20.png",
+              "images/Interstellar Endocytosis Gallery/Untitled21.png",
+              "images/Interstellar Endocytosis Gallery/Untitled22.png",
+              "images/Interstellar Endocytosis Gallery/Untitled23_20240113195720.png",
+              "images/Interstellar Endocytosis Gallery/Untitled24.png",
+              "images/Interstellar Endocytosis Gallery/Untitled25.png",
+              "images/Interstellar Endocytosis Gallery/Untitled27.jpg",
+              "images/Interstellar Endocytosis Gallery/Untitled29.jpg",
+              "images/Interstellar Endocytosis Gallery/1.png",
+              "images/Interstellar Endocytosis Gallery/2.png",
+            ],
+          };
+        }
+
+        // Other Pursuits Gallery Starts Here
+        else if (projectNumber === 7) {
+          return {
+            title: "Computer Science Student Society",
+            description: "",
+            images: [
+              "images/csss/cachedImage.png",
+              "images/csss/cachedImage (1).png",
+              "images/csss/IMG_4620.jpg",
+              "images/csss/IMG_4726.jpg",
+              "images/csss/IMG_9566.jpg",
+              "images/csss/Polish_20230608_133049955.jpg",
+            ],
+          };
+        } else if (projectNumber === 8) {
+          return {
+            title: "Appreciation Campaign",
+            description: "",
+            images: [
+              "images/Appreciation Campaign/IMG_1886.JPG",
+              "images/Appreciation Campaign/IMG_4397.JPG",
+              "images/Appreciation Campaign/IMG_4467.JPG",
+              "images/Appreciation Campaign/IMG_4471.JPG",
+              "images/Appreciation Campaign/IMG_4498.JPG",
+              "images/Appreciation Campaign/IMG_4503.JPG",
+              "images/Appreciation Campaign/IMG_4509.JPG",
+              "images/Appreciation Campaign/IMG_4539.JPG",
+              "images/Appreciation Campaign/IMG_4542.JPG",
+              "images/Appreciation Campaign/IMG_4543.JPG",
+              "images/Appreciation Campaign/IMG_4553.JPG",
+              "images/Appreciation Campaign/IMG_4555.JPG",
+              "images/Appreciation Campaign/IMG_4643.JPG",
+              "images/Appreciation Campaign/IMG_4660.JPG",
+            ],
+          };
+        } else if (projectNumber === 9) {
+          return {
+            title: "Junior Achievement",
+            description: "",
+            images: [
+              "images/JA/IMG_2805.JPG",
+              "images/JA/IMG_2835.JPG",
+              "images/JA/IMG_4660.JPG",
+              "images/JA/IMG_6471.JPG",
+              "images/JA/IMG_6561.PNG",
+              "images/JA/IMG_6563.PNG",
+              "images/JA/IMG_8642.JPG",
+              "images/JA/imh.png",
+            ],
+          };
+        } else if (projectNumber === 10) {
+          return {
+            title: "Travel",
+            description: "",
+            images: [
+              "images/travel/20230712_120134.jpg",
+              "images/travel/20230717_200227.jpg",
+              "images/travel/20230718_181157.jpg",
+              "images/travel/20230725_164748.jpg",
+              "images/travel/20230728_171159.jpg",
+              "images/travel/20230729_102817.jpg",
+              "images/travel/20230729_131047.jpg",
+              "images/travel/20230729_171530.jpg",
+              "images/travel/20230804_211657.jpg",
+              "images/travel/20230804_232458.jpg",
+              "images/travel/20230815_200907.jpg",
+            ],
+          };
+        }
+
+        return {
+          title: "Unknown Project",
+          description: "Description not available.",
+        };
+      }
+    </script>
+  </body>
+
+  <footer>
+    <p>© Princess Tayab. All rights reserved.</p>
+  </footer>
+</html>
