@@ -91,7 +91,7 @@ nav img {
   padding-right: 45vw;
   padding-left: 13vw;
   font-size: 1.2vw;
-  max-width: 150%;
+  text-size-adjust: 130%;
 }
 
 #about {
