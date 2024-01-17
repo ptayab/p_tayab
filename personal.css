@@ -142,18 +142,18 @@ nav img {
   padding: 20px;
   border: 1px solid #000000;
   z-index: 1;
-  padding-right: 70px;
-  max-width: 100%;
+  /* padding-right: 70px; */
+  max-width: 80vh;
   align-items: center;
   color: rgb(0, 0, 0);
   padding-top: 0px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  max-height: 90%;
 }
 
 .image-navigation-container {
-  max-height: 70%;
+  max-height: 70vh;
   display: flex;
+
 }
 
 button {
@@ -162,6 +162,15 @@ button {
   border: none;
   font-size: 24px;
   cursor: pointer;
+  padding: 25px;
+}
+
+#projectImage {
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 60vh;
+  object-fit: contain;
+  margin: auto;
 }
 
 button:hover {
@@ -173,7 +182,7 @@ button:hover {
   padding: 10px;
   padding: 0px;
   text-align: right;
-  margin-right: -69.5px;
+  margin-right: -19px;
   margin-left: -19px;
 }
 .popUp span {
@@ -207,6 +216,7 @@ button:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
+  background-color: pink;
 }
 
 .gallery {
@@ -214,6 +224,7 @@ button:hover {
   text-align: center;
   cursor: pointer;
   position: relative;
+  
 }
 
 .gallery img {
@@ -223,6 +234,7 @@ button:hover {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+  
 }
 
 .gallery:hover img {
