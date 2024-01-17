@@ -39,7 +39,7 @@ nav img {
 }
 
 #intro {
-  background-image: url("images/20230729_154657.jpg");
+  background-image: url("https://imgur.com/BoFX3LM");
   background-size: cover;
   background-position: center center;
   padding: 100%;
@@ -148,10 +148,11 @@ nav img {
   color: rgb(0, 0, 0);
   padding-top: 0px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  max-height: 90%;
 }
 
 .image-navigation-container {
-  max-height: 70vh;
+  max-height: 70%;
   display: flex;
 }
 
