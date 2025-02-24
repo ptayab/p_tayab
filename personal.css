@@ -6,6 +6,11 @@ body {
   background-color: rgb(79, 84, 84);
 }
 
+body.dark-background {
+  background-color: rgba(0, 0, 0, 0.8); 
+  transition: background-color 0.3s ease-in-out;
+}
+
 header {
   background-color: #333;
   color: white;
@@ -151,6 +156,8 @@ nav img {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+
+
 .image-navigation-container {
   max-height: 70vh;
   display: flex;
@@ -221,7 +228,7 @@ button:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
-  background-color: pink;
+  background-color: rgb(222, 192, 255);
 }
 
 .gallery {
